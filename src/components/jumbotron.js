@@ -3,11 +3,11 @@ import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import JumbotronPic from '../icons/Jumbotron.png';
 import ConsultButton from '../icons/ConsultButton.png';
 
-const Jumbotron = () => {
+const Jumbotron = ({ navigation }) => {
     return (
         <View style={styles.jumbotronArea}>
             <Image source={JumbotronPic} style={styles.jumbotron}></Image> 
-            <TouchableOpacity style={styles.buttonPos} onPress={() => alert('Redirects to Consultation Form')}>
+            <TouchableOpacity style={styles.buttonPos} onPress={() =>  navigation.navigate('Login')}>
             <Image source={ConsultButton} style={styles.button}></Image>
             </TouchableOpacity >
         </View>

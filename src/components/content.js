@@ -1,7 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
-import { StyleSheet, View, Text } from 'react-native'; 
+import { StyleSheet, View, Text, ScrollView } from 'react-native'; 
 import { useDispatch, useSelector } from "react-redux";
-import { getArticles } from "../_actions/article";  
+import { getArticles } from "../_actions/article";
+import ContentItem from '../components/content_item';
 
 const Content = () => {
     const article = useSelector(state => state.article.data);
@@ -18,7 +19,7 @@ const Content = () => {
     }, [initFetch]);
 
     const data = article.map((item, index) => (
-        <Text>{item.user.fullName}{"\n"}{item.title}{"\n"}</Text>
+        <ContentItem item={item} key={index}/>
     ))
 
 
@@ -27,10 +28,10 @@ const Content = () => {
             <View style={styles.middleTitle}>
                 <Text style={styles.title}>Artikel Hari Ini</Text>
             </View>
-            <View style={styles.articlePos}>
-                <View style={styles.articleArea} />
-                <View style={styles.articleArea} />
-                <View style={styles.articleArea} />
+            <View style={{position: 'relative', top: 50}}>
+                <ScrollView contentContainerStyle={styles.articleArea}>
+                    { (!loading && !error) && data }
+                </ScrollView >
             </View>
         </View>
     );
@@ -48,19 +49,12 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#FF6185"
     },
-    articlePos: {
-        marginTop: 60,
+    articleArea: {
         flexDirection: "row",
         flexWrap: "wrap",
+        minHeight: 10,
+        paddingBottom: 290
     },
-    articleArea: {
-        width: 150, 
-        height: 195, 
-        marginLeft: 15, 
-        marginRight: 5,
-        marginBottom: 15,
-        backgroundColor: 'skyblue'
-    }
 })
 
 export default Content;

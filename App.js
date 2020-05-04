@@ -7,6 +7,7 @@ import { Button } from 'native-base';
 import Logo from './src/icons/Logo.png';
 
 import Home from './src/views/home'
+import Login from './src/views/login'
 
 const Stack = createStackNavigator();
 
@@ -41,6 +42,7 @@ const App = () => {
             </Grid>
           ),
         }}/>
+        <Stack.Screen name="Login" component={Login}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
